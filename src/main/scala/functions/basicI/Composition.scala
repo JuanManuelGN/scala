@@ -11,6 +11,15 @@ object Composition extends App {
   println(s"compose with one param: ${fComposeG(2)}") // equivalente a f(g(0,2),_)
   println(s"compose with two params: ${fComposeG(2)(3)}") // equivalente a f(g(0,2),3)
   /** Los parámetros se van colocanto en los huecos sin asignar de izquierda a derecha, es decir
-    * si tenemos f(g(5,_),_) y lo parametrizamos con el valor 2, ese 2 va a parar aquí f(g(5,2),_) */
+    * si tenemos f(g(5,_),_) y lo parametrizamos con el valor 2, ese 2 va a parar aquí f(g(5,2),_)
+    * */
+
+  /**
+    * Otra forma de realizar una composición es con andThen
+    */
+  val fAndThenG = f("0").andThen(g)
+  println(s"compose: $fAndThenG")
+  println(s"compose with one param: ${fAndThenG(2)}")
+  println(s"compose with two params: ${fAndThenG(2)(3)}") // equivalente a g(f("0",2),3) = g(2,3) = 2*3 = 6
 
 }
