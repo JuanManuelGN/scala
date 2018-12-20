@@ -1,6 +1,6 @@
 package option.intermediate
 
-import option.OptionsToUse.{opEmpty, opSimpleInt}
+import option.OptionsToUse.{optEmpty, optSimpleInt}
 
 /**
   * El método map nos permite aplicar una función al contenido de un Option.
@@ -11,7 +11,7 @@ import option.OptionsToUse.{opEmpty, opSimpleInt}
 object OptionPatternMatching extends App {
 
   println("Pattern matching with options")
-  val num = opSimpleInt match {
+  val num = optSimpleInt match {
     case Some(x) => x+3
     case None => 0
   }

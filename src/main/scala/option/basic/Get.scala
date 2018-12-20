@@ -1,6 +1,6 @@
 package option.basic
 
-import option.OptionsToUse.{opSimpleMap,opEmpty}
+import option.OptionsToUse.{optSimpleMap,optEmpty}
 
 import scala.util.Try
 
@@ -16,8 +16,8 @@ import scala.util.Try
 object Get extends App {
 
   println("Option.get")
-  println(s"Se obtiene el valor del option con la función get: Some(Map(a -> b)).get = ${opSimpleMap.get}")
+  println(s"Se obtiene el valor del option con la función get: Some(Map(a -> b)).get = ${optSimpleMap.get}")
   println(s"Se intenta obtiener el valor del option con contenido None(val opEmpty: Option[Map[String,String]] = None)" +
-    s" con la función get:None.get = ${Try(opEmpty.get)}" +
+    s" con la función get:None.get = ${Try(optEmpty.get)}" +
     s". Se puede comprobar que ha dado una java.util.NoSuchElementException")
 }
