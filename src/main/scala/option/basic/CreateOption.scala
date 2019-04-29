@@ -1,5 +1,7 @@
 package option.basic
 
+import java.net.URI
+
 /**
   * En esta clase se van a explorar las diferentes formas de crear Option[A]
   */
@@ -30,4 +32,18 @@ object CreateOption extends App {
   val sOption = Option(s).filter(_.nonEmpty)
   println("Se ha creado un Option con Option(\"im String\").filter(_.nonEmpty) = " +
     s"${sOption}")
+
+  case class Url(protocol: String, host: String, path: String)
+  def getUrl(uri: java.net.URI): Option[Url] =
+    for {
+      protocol <- Option(uri.getScheme)
+      host <- Option(uri.getHost)
+      path <- Option(uri.getRawPath)
+    }
+      yield Url(protocol, host, path)
+
+  val uriMalFormet = new URI("")
+  val uriOk = new URI("https://www.geeksforgeeks.org/url-class-java-examples/")
+  println(getUrl(uriMalFormet))
+  println(getUrl(uriOk))
 }
