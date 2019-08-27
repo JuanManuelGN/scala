@@ -5,6 +5,7 @@ package io.compress
   */
 object DeCompress extends App {
 
+
   import java.io.{File, FileInputStream, FileOutputStream}
   import java.util.zip.GZIPInputStream
 
