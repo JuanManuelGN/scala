@@ -3,10 +3,7 @@ package option.intermediate
 import option.OptionsToUse.{optEmpty, optSimpleInt}
 
 /**
-  * El método map nos permite aplicar una función al contenido de un Option.
-  * Resultados posibles
-  * Some(x).map(f) = Some(f(x))
-  * None.map(f) = None
+  * Con el Option también es posible usar un pattern matching
   */
 object OptionPatternMatching extends App {
 
