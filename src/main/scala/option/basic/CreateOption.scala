@@ -2,6 +2,8 @@ package option.basic
 
 import java.net.URI
 
+import scala.util.Try
+
 /**
   * En esta clase se van a explorar las diferentes formas de crear Option[A]
   */
@@ -10,6 +12,9 @@ object CreateOption extends App {
   val nilString = Nil
   val emptyString = ""
   val s = "im String"
+  val saludo = "hola"
+  val despedida = "adios"
+  val boom = "boom"
 
   val nilOption = Option(nilString)
   println(s"Se ha creado un Option con Option(Nil) = ${nilOption}")
@@ -46,4 +51,24 @@ object CreateOption extends App {
   val uriOk = new URI("https://www.geeksforgeeks.org/url-class-java-examples/")
   println(getUrl(uriMalFormet))
   println(getUrl(uriOk))
+
+  /** Creación de un Option a raíz de un cómputo */
+
+  println("Creación de un Option a raíz de un cómputo")
+  val optComputeSome = Try(runCompute(saludo)).toOption
+  println("Se ha creado un Option con Try(runCompute(\"hola\")).toOption = " +
+    s"${optComputeSome}")
+
+  val optComputeNone = Try(runCompute(despedida)).toOption
+
+  println("Se ha creado un Option con Try(runCompute(\"adiós\")).toOption = " +
+    s"${optComputeNone}")
+
+  def runCompute(s: String): String = {
+    s match {
+      case "hola" => "que pasa"
+      case _ => throw new Exception(boom)
+    }
+  }
+  /***********************************************/
 }
