@@ -49,8 +49,8 @@ object CreateOption extends App {
 
   val uriMalFormet = new URI("")
   val uriOk = new URI("https://www.geeksforgeeks.org/url-class-java-examples/")
-  println(getUrl(uriMalFormet))
-  println(getUrl(uriOk))
+  println(s"Se obtiene un Option para la clase URL con una uri mal formada = ${getUrl(uriMalFormet)}")
+  println(s"Se obtiene un Option para la clase URL con una uri bien formada = ${getUrl(uriOk)}")
 
   /** Creación de un Option a raíz de un cómputo */
 
