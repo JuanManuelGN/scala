@@ -24,4 +24,6 @@ object Composition extends App {
   println(s"compose with one param fAndThenG(2): ${fAndThenG(2)}")
   println(s"compose with two params fAndThenG(2)(3): ${fAndThenG(2)(3)}") // equivalente a g(f("0",2),3) = g(2,3) = 2*3 = 6
 
+  println(s"el tipo de la funcion f: String => Int => Int = a => b => a.toInt + b es: ${f.getClass.toGenericString}")
+
 }
