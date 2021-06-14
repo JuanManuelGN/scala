@@ -9,3 +9,5 @@ out/
 
 target/
 data/
+
+.bsp/
