@@ -34,7 +34,7 @@ object KleisiTraining {
 //  val reciParse = reciprocal.compose(parse)
 
   /**
-    * Para resover esto podemos usar la clase Kleisi de cats
+    * Para resolver esto podemos usar la clase Kleisi de cats
     */
 
   import cats.implicits._
@@ -46,7 +46,7 @@ object KleisiTraining {
     Kleisli((i: Int) => if (i != 0) Some(1.0 / i) else None)
 
   val parseAndReciprocalK: Kleisli[Option,String,Double] =
-    reciprocalK.compose(parseK)
+    reciprocalK compose parseK
 }
 
 object KleisiTrainingRunner extends App {
