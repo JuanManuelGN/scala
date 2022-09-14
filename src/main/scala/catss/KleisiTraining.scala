@@ -11,7 +11,7 @@ object KleisiTraining {
     * Tenemos dos funciones una que transforma un cadena a entero
     * y otra que divide el 1.0 entre un entero pasado por parámetro
     * las dos devuelven un Option[_]
-    * ¿Qué pasa si las intentamos compoener?
+    * ¿Qué pasa si las intentamos componer?
     */
   /**
     * Transforma una cadena a entero
