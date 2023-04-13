@@ -1,7 +1,7 @@
 package adt
 
 /**
-  * El código del presente fichero expone un ejemplo para el uso de ADT( Abstract Data Type)
+  * El código del presente fichero expone un ejemplo para el uso de ADT(Abstract Data Type)
   * En concreto se quiere realizar un filtrado sobre una lista de enteros según unas condiciones
   * que pueden combinarse con diferentes operaciones booleanas: and, or etc.
   */

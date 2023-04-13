@@ -39,13 +39,13 @@ object KleisiTraining {
 
   import cats.implicits._
 
-  val parseK: Kleisli[Option,String,Int] =
+  val parseK: Kleisli[Option, String, Int] =
     Kleisli((s: String) => if (s.matches("-?[0-9]+")) Some(s.toInt) else None)
 
-  val reciprocalK: Kleisli[Option,Int,Double] =
+  val reciprocalK: Kleisli[Option, Int, Double] =
     Kleisli((i: Int) => if (i != 0) Some(1.0 / i) else None)
 
-  val parseAndReciprocalK: Kleisli[Option,String,Double] =
+  val parseAndReciprocalK: Kleisli[Option, String, Double] =
     reciprocalK compose parseK
 }
 
