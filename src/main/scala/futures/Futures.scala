@@ -55,7 +55,7 @@ object FuturesMain extends App {
 
 
   val r =
-    Try(Await.result(sumFutures, 5 seconds)) match {
+    Try(Await.result(sumFutures, 5.seconds)) match {
       case Success(value) => value
       case Failure(exception) => -1
     }
@@ -75,7 +75,7 @@ object FuturesMain extends App {
 
 
   val lazyR =
-    Try(Await.result(lazySumFutures, 5 seconds)) match {
+    Try(Await.result(lazySumFutures, 5.seconds)) match {
       case Success(value) => value
       case Failure(exception) => -1
     }
