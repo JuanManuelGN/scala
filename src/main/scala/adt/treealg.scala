@@ -8,9 +8,11 @@ object treealg {
     * AST para representar de forma genérica la evaluación de condiciones en una sobre una estructura
     * de datos, por ejemplo se quiere saber si una seríe de predicados combiandos en un árbol con operaciones
     * lógicas son ciertos o no:
-    *                           and
-    *                       and    (x = 4)
-    *                (x > 3)   (x < 5)
+    *                         --and--
+    *                        |       |
+    *                     --and--   (x = 4)
+    *                     |      |
+    *               (x > 3)     (x < 5)
     * @tparam A
     */
   sealed trait Tree[+A]
