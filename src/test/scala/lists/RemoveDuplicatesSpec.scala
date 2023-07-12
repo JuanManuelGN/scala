@@ -4,8 +4,6 @@ import lists.model.Item
 import lists.model.Kind._
 import org.scalatest.funsuite.AnyFunSuite
 
-import metrics.TimeMeter
-
 class RemoveDuplicatesSpec extends AnyFunSuite {
 
   test("lists without duplicates") {
