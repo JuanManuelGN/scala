@@ -3,7 +3,7 @@ package lists
 import lists.model.Item
 import lists.model.Kind._
 import org.scalatest.funsuite.AnyFunSuite
-
+// todo add property based tests
 class RemoveDuplicatesTailRecSpec extends AnyFunSuite {
 
   test("lists without duplicates") {
