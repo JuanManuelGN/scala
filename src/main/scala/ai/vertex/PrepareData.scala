@@ -15,7 +15,7 @@ object PrepareData extends App {
     bw.close()
   }
 
-  val path = "/Users/juanmagn/Documents/GitHub/scala/src/main/scala/ai/vertex/data"
+  val path = "your path"
 
   def readData(fromDir: String): Unit = {
     val lines = Files.list(FileSystems.getDefault.getPath(fromDir))
@@ -41,5 +41,5 @@ object PrepareData extends App {
 
   }
 
-  readData("/Users/juanmagn/Documents/GitHub/scala/src/main/scala/ai/vertex/data")
+  readData("your path")
 }
