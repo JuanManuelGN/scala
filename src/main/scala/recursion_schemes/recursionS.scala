@@ -29,12 +29,12 @@ object recursionS {
   }
 
   // Type A => F[A] is also known as Coalgebra.
-  def ana[F[_] : Functor, A](f: A => F[A]): A => Fix[F] =
-    a => Fix(f(a) map ana(f))
+  def ana[F[_] : Functor, A](coAlgebra: A => F[A]): A => Fix[F] =
+    a => Fix(coAlgebra(a) map ana(coAlgebra))
 
   // Type F[A] => A is also known as Algebra.
-  def cata[F[_] : Functor, A](f: F[A] => A): Fix[F] => A =
-    fix => f(fix.unfix map cata(f))
+  def cata[F[_] : Functor, A](algebra: F[A] => A): Fix[F] => A =
+    fix => algebra(fix.unfix map cata(algebra))
 
   // Coalgebra for factorial
   val stackCoalgebra: Int => Stack[Int] =
@@ -61,9 +61,9 @@ object Runner extends App {
     *      ...
     *
     */
-//  println(
-//    ana(stackCoalgebra).apply(5)
-//  )
+  println(
+    ana(stackCoalgebra).apply(5)
+  )
 
   println(
     (ana(stackCoalgebra) andThen cata(stackAlgebra))(5)
