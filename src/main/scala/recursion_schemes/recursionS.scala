@@ -4,6 +4,9 @@ import cats.Functor
 import cats.implicits._
 import recursion_schemes.recursionS.Stack.{done, more}
 
+/**
+  * https://free.cofree.io/2017/11/13/recursion/
+  */
 object recursionS {
 
   final case class Fix[F[_]](unfix: F[Fix[F]])
@@ -47,13 +50,21 @@ object recursionS {
   }
 }
 
-import recursion_schemes.recursionS.{ana, cata, stackCoalgebra, stackAlgebra}
+import recursion_schemes.recursionS.{ana, cata, stackAlgebra, stackCoalgebra}
 object Runner extends App {
   /**
+    * def ana[F[_] : Functor, A](coAlgebra: A => F[A]): A => Fix[F] =
+    *   a => Fix(coAlgebra(a) map ana(coAlgebra))
+    * implicit val stackFunctor: Functor[Stack] = new Functor[Stack] {
+    *   override def map[A, B](sa: Stack[A])(f: A => B): Stack[B] =
+    *     sa match {
+    *       case Done(result) => Done(result)
+    *       case More(a, next) => More(f(a), next)
+    *     }
     * ana(stackCoalgebra).apply(5) =
     * Fix(More(Fix(More(Fix(More(Fix(More(Fix(More(Fix(Done(1)),1)),2)),3)),4)),5))
     * Step by Step
-    * ana(stackCoalgebra).apply(5) = { ana = a => Fix(f(a) map ana(f)) | a = 5 }
+    * ana(stackCoalgebra).apply(5) = { ana = a => Fix(f(a) map ana(f)) | a = 5 | f = stackCoalgebra }
     *  Fix(stackCoalgebra(5) map ana(stackCoalgebra)) = { stackCoalgebra(5) = more(4, 5) }
     *   Fix(more(4, 5) map ana(stackCoalgebra)) = { more(4, 5) = More(4, 5) }
     *    Fix(More(4, 5) map ana(stackCoalgebra)) = { map ana(stackCoalgebra) = More(ana(stackCoalgebra)(a), next) | a = 4 | next = 5}
