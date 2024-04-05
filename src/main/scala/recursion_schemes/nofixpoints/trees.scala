@@ -1,5 +1,7 @@
 package recursion_schemes.nofixpoints
 
+import recursion_schemes.nofixpoints.trees.TreeFFix.{cataFix, outF}
+
 import scala.annotation.tailrec
 
 object trees {
@@ -63,12 +65,34 @@ object trees {
     def cata[F[_], R, A](algebra: F[A] => A, out: R => F[R])(r: R)(implicit F: Functor[F]): A =
       algebra(F.map(cata(algebra, out))(out(r)))
   }
+
+  final case class Fix[F[_]](unfix: F[Fix[F]])
+
+  object TreeFFix {
+    def inF: TreeF[Fix[TreeF]] => Fix[TreeF]  = Fix(_)
+    def outF: Fix[TreeF] => TreeF[Fix[TreeF]] = _.unfix
+
+    trait Functor[F[_]] {
+      def map[A, B](f: A => B): F[A] => F[B]
+    }
+
+    implicit val treeFFunctor: Functor[TreeF] = new Functor[TreeF] {
+      override def map[A, B](f: A => B): TreeF[A] => TreeF[B] = {
+        case LeafF(v)    => LeafF(v)
+        case NodeF(l, r) => NodeF(f(l), f(r))
+      }
+    }
+
+    def cataFix[F[_], R, A](algebra: F[A] => A, out: R => F[R])(r: R)(implicit F: Functor[F]): A =
+      algebra(F.map(cataFix(algebra, out))(out(r)))
+  }
+
 }
 
 import recursion_schemes.nofixpoints.trees._
 
-object TreeRunner extends App {
-  private val tree =
+object TreeData {
+  val tree =
     Node(
       Node(
         Leaf(1),
@@ -89,6 +113,13 @@ object TreeRunner extends App {
       )
     )
 
+  val treeFix: Fix[TreeF] = Fix(LeafF(1))
+
+}
+
+import recursion_schemes.nofixpoints.TreeData._
+
+object TreeRunner extends App {
   println(
     s"Sum ${Tree.sumTreeFold(tree)}"
   )
@@ -115,5 +146,15 @@ object TreeRunner extends App {
 
   println(
     s"Leaves using recursion schemes ${countLeavesRS(tree)}"
+  )
+
+  ////////////////////////////////
+  // Recursion Schemes Fixpoint //
+  ////////////////////////////////
+  import recursion_schemes.nofixpoints.trees.TreeFFix.treeFFunctor
+  def countLeavesRSFix: Fix[TreeF] => Int = cataFix(countLeavesAlgebra, outF)
+
+  println(
+    s"Leaves using recursion schemes fixpoint ${countLeavesRSFix(treeFix)}"
   )
 }
