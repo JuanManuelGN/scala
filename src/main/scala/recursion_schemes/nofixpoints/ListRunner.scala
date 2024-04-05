@@ -1,8 +1,8 @@
 package recursion_schemes.nofixpoints
 
-import recursion_schemes.nofixpoints.lists._
-import recursion_schemes.nofixpoints.listfs._
-import recursion_schemes.nofixpoints.listfs.ListF._
+import recursion_schemes.nofixpoints.list._
+import recursion_schemes.nofixpoints.listf._
+import recursion_schemes.nofixpoints.listf.ListF._
 
 /** https://www.youtube.com/watch?v=XZ9nPZbaYfE
   */

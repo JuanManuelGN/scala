@@ -2,7 +2,10 @@ package recursion_schemes.nofixpoints
 
 import scala.annotation.tailrec
 
-object lists {
+/**
+  * Implementación de listas usando fold y recursión
+  */
+object list {
 
   sealed trait List
   case object Nil                           extends List

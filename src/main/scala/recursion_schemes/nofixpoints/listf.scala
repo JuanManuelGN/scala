@@ -1,8 +1,11 @@
 package recursion_schemes.nofixpoints
 
-import recursion_schemes.nofixpoints.lists._
+import recursion_schemes.nofixpoints.list._
 
-object listfs {
+/**
+  * Implementación de listas usando esquemas de recursión
+  */
+object listf {
 
   sealed trait ListF[A]
   case class NilF[A]()                    extends ListF[A]
