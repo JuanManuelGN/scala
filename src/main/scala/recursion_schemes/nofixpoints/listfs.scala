@@ -38,14 +38,26 @@ object listfs {
       case ConsF(h, t) => Cons(h, t)
     }
 
+    /**
+      * El anamorfismo es un generador recursivo. Sirve para crear una estructura de manera recursiva.
+      * Similar al unfold
+      */
     def ana[F[_], R, A](coalgebra: Coalgebra[F, A], in: F[R] => R)(a: A)(implicit
         F: Functor[F]
     ): R =
       in(F.map(ana(coalgebra, in))(coalgebra(a)))
 
+    /**
+      * El catamorfismo es un plegador de estructuras similar al fold. Con cata podemos consumir
+      * una estructura de datos para generar un resultado.
+      */
     def cata[F[_], R, A](algebra: F[A] => A, out: R => F[R])(r: R)(implicit F: Functor[F]): A =
       algebra(F.map(cata(algebra, out))(out(r)))
 
+    /**
+      * El hylomorfismo es la composición del anamorfismo y el catamorfismo, por un lado ana construye
+      * la estructura y por otro cata la consume
+      */
     def hylo[F[_], A, B](coalgebra: A => F[A], algebra: F[B] => B)(a: A)(implicit
         F: Functor[F]
     ): B =
