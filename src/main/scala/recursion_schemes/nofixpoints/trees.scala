@@ -87,6 +87,23 @@ object trees {
       algebra(F.map(cataFix(algebra, out))(out(r)))
   }
 
+  object TreeFFixWithoutInOut {
+
+    trait Functor[F[_]] {
+      def map[A, B](f: A => B): F[A] => F[B]
+    }
+
+    implicit val treeFFunctor: Functor[TreeF] = new Functor[TreeF] {
+      override def map[A, B](f: A => B): TreeF[A] => TreeF[B] = {
+        case LeafF(v)    => LeafF(v)
+        case NodeF(l, r) => NodeF(f(l), f(r))
+      }
+    }
+
+    def cataFixWihtoutInOut[F[_], A](algebra: F[A] => A)(r: Fix[F])(implicit F: Functor[F]): A =
+      algebra(F.map(cataFixWihtoutInOut(algebra))(r.unfix))
+  }
+
 }
 
 import recursion_schemes.nofixpoints.trees._
@@ -156,5 +173,15 @@ object TreeRunner extends App {
 
   println(
     s"Leaves using recursion schemes fixpoint ${countLeavesRSFix(treeFix)}"
+  )
+
+  /////////////////////////////////////////////////////////////
+  // Recursion Schemes Fixpoint without in and out functions //
+  /////////////////////////////////////////////////////////////
+  import recursion_schemes.nofixpoints.trees.TreeFFixWithoutInOut._
+  def countLeavesRSFixWithoutInOut: Fix[TreeF] => Int = cataFixWihtoutInOut(countLeavesAlgebra)
+
+  println(
+    s"Leaves using recursion schemes fixpoint without in and out functions ${countLeavesRSFixWithoutInOut(treeFix)}"
   )
 }
