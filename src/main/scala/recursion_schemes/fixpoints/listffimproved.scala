@@ -28,8 +28,7 @@ object listffimproved {
 
   def cata[F[_], A](algebra: Algebra[F, A])(r: Fix[F])(implicit F: Functor[F]): A =
     algebra(F.map(cata(algebra))(r.unfix))
-
-  // def hyloSimple[F[_] : Functor, A, B](f: F[B] => B)(g: A => F[A]): A => B = ana(g) andThen cata(f)
+  
   def hylo[F[_]: Functor, A](algebra: Algebra[F, A])(coalgebra: Coalgebra[F, A])(a: A): A =
     cata(algebra)(ana(coalgebra)(a))
 }
