@@ -36,4 +36,28 @@ object OptionFold extends App {
     ".fold(\"notFound\")(map => map.getOrElse(\"c\",\"notFound\")) = " +
     s"${optEmpty.fold("notFound")(map => map.getOrElse("a","notFound"))}")
   println("")
+
+  /**
+    * Obtener resultado parciales dados varios campos que dependen uno de otro
+    * Si hay email se sigue con la obtención de la account, y si hay account se sigue
+    * con profile
+    */
+  val email          = Some("email")
+  //  val email          = None
+  //  val account        = Some("account")
+  val account        = None
+  val profile        = Some("profile")
+  val defaultProfile = Some("defaultProfile")
+
+  case class Info(
+                   email: Option[String] = None,
+                   account: Option[String] = None,
+                   profile: Option[String] = None
+                 )
+
+  val info = email.fold(Info()) { _ =>
+    account.fold(Info(email))(_ => Info(email, account, profile.fold(defaultProfile)(_ => profile)))
+  }
+
+  println(s"info $info")
 }

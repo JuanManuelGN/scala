@@ -8,7 +8,7 @@ import option.OptionsToUse.{optSimpleInt,optEmpty}
   * Some(x).map(f) = Some(f(x))
   * None.map(f) = None
   */
-object Map extends App {
+object MapBasic extends App {
 
   println("Option.map")
   println(s"Se aplica la función sumar 8 al contenido del Option, devolviendo otro Option con la transformación: " +
