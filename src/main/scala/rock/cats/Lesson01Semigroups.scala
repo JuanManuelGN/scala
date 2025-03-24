@@ -1,7 +1,8 @@
 package rock.cats
 
-/** Combinar elementos de similares tipos
-  */
+/** 
+ * Combinar elementos de similares tipos
+ */
 object Lesson01Semigroups {
 
   import cats.Semigroup

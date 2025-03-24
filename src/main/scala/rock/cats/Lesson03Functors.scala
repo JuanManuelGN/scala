@@ -2,6 +2,9 @@ package rock.cats
 
 import scala.util.Try
 
+/**
+ * Recorrer una estructura de datos realizando una transformación en ella
+ */
 object Lesson03Functors {
 
   val aModifiedList   = List(1, 2, 3).map(_ + 1) // List(2,3,4)
@@ -34,7 +37,7 @@ object Lesson03Functors {
   def do10x[F[_]](container: F[Int])(implicit functor: Functor[F]): F[Int] =
     functor.map(container)(_ * 10)
 
-  // Exercise 1: define your own functor for a binay tree
+  // Exercise 1: define your own functor for a binary tree
   trait Tree[+T]
   object Tree {
     def leaf[T](value: T): Tree[T]                                  = Leaf(value)
