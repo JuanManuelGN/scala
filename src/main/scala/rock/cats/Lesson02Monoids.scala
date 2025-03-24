@@ -3,7 +3,7 @@ package rock.cats
 /** Monids: Es un conjunto 𝑀 con una operación binaria es un monoide si cumple que la operación es
   * asociativa y tiene elemento neutro
   */
-object Lesson02Monids {
+object Lesson02Monoids {
 
   import cats.Semigroup
   import cats.instances.int._
@@ -31,7 +31,7 @@ object Lesson02Monids {
   val combineString = Monoid[String].combine("This is a ", "monoid")
 
   import cats.instances.option._ // construct an implicit Monoid[Option[Int]]
-  val emptyOption   = Monoid[Option[Int]].empty
+  val emptyOption: Option[Int] = Monoid[Option[Int]].empty
   val combineOption = Monoid[Option[Int]].combine(Option(2), Option.empty[Int]) // Some(2)
   val combineOption2 = Monoid[Option[Int]].combine(
     Option(2),
