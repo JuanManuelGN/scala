@@ -1,8 +1,25 @@
 package rock.cats
+
 import java.util.concurrent.Executors
+
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
+/**
+ * Monads
+ * Higher-Kinded type class that provides
+ *  - a pure method to wrap a normal value into a monadic value
+ *  - a flatMap method to transform monadic values in sequence
+ * Can implement map in terms of pure + flatMap
+ *  - Monads extends Functors
+ * Extension methods are in other packages
+ * map + flatMap = for-comprehensions
+ * Use cases: sequential transformations
+ *  - list combinations
+ *  - option transformations
+ *  - asynchronous chained computations
+ *  - dependent computations
+ */
 object Lesson04Monads {
 
   val numberList = List(1, 2, 3)
@@ -46,6 +63,8 @@ object Lesson04Monads {
   trait MyMonad[M[_]] {
     def pure[A](value: A): M[A]
     def flatMap[A, B](ma: M[A])(f: A => M[B]): M[B]
+    // todo implement this
+    def map[A, B](ma: M[A])(f: A => B): M[B] = flatMap(ma)(a => pure[B](f(a)))
   }
 
   // cats monads
@@ -79,10 +98,45 @@ object Lesson04Monads {
   def getPairs[M[_], A, B, R](ma: M[A], mb: M[B])(implicit monad: Monad[M]): M[(A, B)] =
     monad.flatMap(ma)(a => monad.map(mb)(b => (a, b)))
 
+  // extension methods
+  import cats.syntax.applicative._ // pure is here
+  val oneOption = 1.pure[Option] // implicit Monad[Option] will be use => Some(1)
+  val oneList   = 1.pure[List]   // List(1)
+
+  import cats.syntax.flatMap._ // flatMap is here
+  val transformedOption = oneOption.flatMap(x => if (x % 3 == 0) (x + 1).pure[Option] else None)
+
+  // todo: implement the map method in MyMonad
+  // Monads extends Functors
+  val oneOptionMapped = Monad[Option].map(Option(2))(_ + 1) // Some(3)
+  import cats.syntax.functor._ // map is here
+  val oneOptionMapped2 = oneOption.map(_ + 2)
+
+  // for-comprehension
+  val composedOption = for {
+    one <- 1.pure[Option]
+    two <- 2.pure[Option]
+  } yield one + two // Some(3)
+
+  // todo: implement a shorter version of getPairs using for-comprehension
+  def getPairsFor[M[_], A, B](ma: M[A], mb: M[B])(implicit monad: Monad[M]): M[(A, B)] = for {
+    a <- ma
+    b <- mb
+  } yield (a, b) // same as ma.flatMap(a => mb.map(b => (a, b)))
+
+  // se puede definir así, de forma mas corta
+  def getPairsForShorter[M[_]: Monad, A, B](ma: M[A], mb: M[B]): M[(A, B)] = for {
+    a <- ma
+    b <- mb
+  } yield (a, b) // same as ma.flatMap(a => mb.map(b => (a, b)))
+  
+  // next video https://courses.rockthejvm.com/courses/1107955/lectures/23728907
+
   def main(arg: Array[String]): Unit = {
-    println(getPairs(numberList, charList))
-    println(getPairs(numberOpt, charOpt))
-    getPairs(numberFuture, charFuture).foreach(println)
+//    println(getPairs(numberList, charList))
+//    println(getPairs(numberOpt, charOpt))
+//    getPairs(numberFuture, charFuture).foreach(println)
+    getPairsFor(numberList, charList).foreach(println)
 
   }
 }
