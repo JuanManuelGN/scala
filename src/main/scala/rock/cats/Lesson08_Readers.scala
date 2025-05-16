@@ -1,6 +1,6 @@
 package rock.cats
 
-object Lesson08Readers {
+object Lesson08_Readers {
 
   /*
     - configuration file => initial data structure

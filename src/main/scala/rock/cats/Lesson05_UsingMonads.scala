@@ -5,7 +5,7 @@ import scala.util.Try
 /**
  * Monads
  */
-object Lesson05UsingMonads {
+object Lesson05_UsingMonads {
 
   import cats.Monad
   import cats.instances.list._

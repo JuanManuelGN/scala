@@ -2,7 +2,7 @@ package rock.cats
 
 import scala.annotation.tailrec
 
-object Lesson06CustomMonads {
+object Lesson06_CustomMonads {
 
   import cats.Monad
   implicit object OptionMonad extends Monad[Option] {

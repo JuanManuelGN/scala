@@ -5,7 +5,7 @@ import scala.util.Try
 /**
  * Recorrer una estructura de datos realizando una transformación en ella
  */
-object Lesson03Functors {
+object Lesson03_Functors {
 
   val aModifiedList   = List(1, 2, 3).map(_ + 1) // List(2,3,4)
   val aModifiedOption = Option(3).map(_ + 1)     // Some(4)

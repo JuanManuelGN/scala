@@ -20,7 +20,7 @@ import scala.concurrent.Future
  *  - asynchronous chained computations
  *  - dependent computations
  */
-object Lesson04Monads {
+object Lesson04_Monads {
 
   val numberList = List(1, 2, 3)
   val charList   = List('a', 'b', 'c', 'd')

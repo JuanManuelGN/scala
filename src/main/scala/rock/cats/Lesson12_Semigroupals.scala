@@ -18,7 +18,7 @@ import scala.concurrent.Future
         ^               ^   ^
      Monoid             Monad
  */
-object Lesson12Semigroupals {
+object Lesson12_Semigroupals {
 
   trait MySemigroupal[F[_]] {
     def product[A, B](fa: F[A], fb: F[B]): F[(A, B)]

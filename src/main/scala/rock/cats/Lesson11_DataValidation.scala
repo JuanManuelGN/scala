@@ -1,7 +1,7 @@
 package rock.cats
 import scala.util.Try
 
-object Lesson11DataValidation {
+object Lesson11_DataValidation {
 
   import cats.data.Validated
   val aValidValue: Validated[String, Int] = Validated.Valid(42) // "right" value

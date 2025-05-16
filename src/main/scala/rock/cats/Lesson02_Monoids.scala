@@ -3,7 +3,7 @@ package rock.cats
 /** Monids: Es un conjunto 𝑀 con una operación binaria es un monoide si cumple que la operación es
   * asociativa y tiene elemento neutro
   */
-object Lesson02Monoids {
+object Lesson02_Monoids {
 
   import cats.Semigroup
   import cats.instances.int._

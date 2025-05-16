@@ -1,6 +1,6 @@
 package rock.cats
 
-object Lesson09Evaluation {
+object Lesson09_Evaluation {
 
   /*
     Cats makes the distinction between

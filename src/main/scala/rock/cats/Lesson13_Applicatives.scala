@@ -15,7 +15,7 @@ package rock.cats
                           ^
                         Monad
 */
-class Lesson13Applicatives {
+class Lesson13_Applicatives {
 
   // Applicatives = Functors + the pure method
   import cats.Applicative

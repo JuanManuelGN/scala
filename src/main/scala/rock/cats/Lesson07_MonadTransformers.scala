@@ -11,7 +11,7 @@ import cats.instances.future._
  * OptionT and EitherT
  * use map and flatMap
  */
-object Lesson07MonadTransformers {
+object Lesson07_MonadTransformers {
 
   def sumAllOptions(ops: List[Option[Int]]): Int = ???
 

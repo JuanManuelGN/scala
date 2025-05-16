@@ -3,7 +3,7 @@ import java.util.concurrent.Executors
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
 
-object Lesson08Writers {
+object Lesson08_Writers {
 
   import cats.data.Writer
   // 1 - define them at the start

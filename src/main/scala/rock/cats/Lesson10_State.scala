@@ -1,6 +1,6 @@
 package rock.cats
 
-object Lesson10State {
+object Lesson10_State {
 
   /*
     S = State S => (S, A)

@@ -3,7 +3,7 @@ package rock.cats
 /** 
  * Combinar elementos de similares tipos
  */
-object Lesson01Semigroups {
+object Lesson01_Semigroups {
 
   import cats.Semigroup
   import cats.instances.int._
