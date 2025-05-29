@@ -31,7 +31,8 @@ object KleisiTraining {
     * compilación siendo imposible componer estas funciones sin cambiar su signatura
     * puesto que los tipos son incompatibles
     */
-//  val reciParse = reciprocal.compose(parse)
+//  val reciParse = reciprocal.compose(parse) // reciprocal(parse(x))
+//  val parseReci = reciprocal.andThen(parse) // parse(reciprocal(x))
 
   /**
     * Para resolver esto podemos usar la clase Kleisi de cats
@@ -39,11 +40,11 @@ object KleisiTraining {
 
   import cats.implicits._
 
-  val parseK: Kleisli[Option, String, Int] =
-    Kleisli((s: String) => if (s.matches("-?[0-9]+")) Some(s.toInt) else None)
-
-  val reciprocalK: Kleisli[Option, Int, Double] =
-    Kleisli((i: Int) => if (i != 0) Some(1.0 / i) else None)
+  val parseK: Kleisli[Option, String, Int] = Kleisli(parse)
+//    Kleisli((s: String) => if (s.matches("-?[0-9]+")) Some(s.toInt) else None)
+  
+  val reciprocalK: Kleisli[Option, Int, Double] = Kleisli(reciprocal)
+//    Kleisli((i: Int) => if (i != 0) Some(1.0 / i) else None)
 
   val parseAndReciprocalK: Kleisli[Option, String, Double] =
     reciprocalK compose parseK
